@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: qr-studio
+    env: docker
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 3847
+      # PUBLIC_URL should be set after you get your Render URL:
+      # e.g. https://your-app.onrender.com
