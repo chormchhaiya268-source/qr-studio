@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Studio — Text & Any File</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>QR Studio</h1>
+      <p>Create QR codes for text or any file — PNG, PDF, video, audio, documents, ZIP, and more.</p>
+      <span class="badge" id="urlBadge">Server: checking…</span>
+      <div class="alert alert-warn" id="scanAlert" hidden>
+        <strong>Phone can’t use localhost.</strong>
+        Connect your phone to the same Wi‑Fi as this PC, restart the server, then generate the QR again.
+        Or set <code>PUBLIC_URL</code> to your PC’s IP (run <code>ipconfig</code>).
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="card-head">Create content</div>
+        <div class="card-body">
+          <nav class="tabs" role="tablist" aria-label="Content type">
+            <button type="button" class="tab active" data-tab="text" role="tab" aria-selected="true">Text</button>
+            <button type="button" class="tab" data-tab="file" role="tab" aria-selected="false">File</button>
+          </nav>
+
+          <div id="panel-text" class="panel active" role="tabpanel">
+            <label for="textTitle">Title (optional)</label>
+            <input type="text" id="textTitle" placeholder="My note" maxlength="120" />
+
+            <label for="textBody">Text</label>
+            <textarea id="textBody" placeholder="Type the message people will see when they scan…" maxlength="2000"></textarea>
+            <p class="hint"><span id="charCount">0</span> / 2000 — Short text (under 280 chars) can be embedded directly in the QR.</p>
+          </div>
+
+          <div id="panel-file" class="panel" role="tabpanel" hidden>
+            <label for="fileTitle">Title (optional)</label>
+            <input type="text" id="fileTitle" placeholder="My file" maxlength="120" />
+
+            <div class="dropzone" id="dropFile" tabindex="0" role="button" aria-label="Upload file">
+              <div class="dropzone-icon" id="fileIcon">📎</div>
+              <p><strong>Drag & drop</strong> any supported file here</p>
+              <p>or click to browse (max <span id="maxMb">25</span> MB)</p>
+              <input type="file" id="fileInput" />
+            </div>
+            <p class="hint formats-hint" id="formatsHint">Loading supported types…</p>
+
+            <div class="preview-box" id="filePreview">
+              <div class="file-thumb" id="fileThumbWrap">
+                <img id="fileThumb" alt="" hidden />
+                <span class="file-ext-badge" id="fileExtBadge"></span>
+              </div>
+              <div class="meta">
+                <div class="name" id="fileName"></div>
+                <div class="size" id="fileSize"></div>
+                <div class="type-tag" id="fileTypeTag"></div>
+              </div>
+              <button type="button" class="btn btn-ghost" id="clearFile">Remove</button>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" id="btnGenerate">Generate QR</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card qr-panel">
+        <div class="card-head">Your QR code</div>
+        <div class="card-body">
+          <div class="placeholder" id="qrPlaceholder">
+            Add text or a file, then tap Generate QR.
+          </div>
+          <img id="qrImage" alt="Generated QR code" hidden />
+          <div class="qr-actions" id="qrActions">
+            <button type="button" class="btn btn-secondary" id="btnDownload">Download QR (PNG)</button>
+            <button type="button" class="btn btn-secondary" id="btnCopyLink">Copy scan link</button>
+            <div class="link-box">
+              <input type="text" id="scanLink" readonly aria-label="Scan link" />
+              <button type="button" class="btn btn-secondary" id="btnCopyInput">Copy</button>
+            </div>
+            <p class="hint" id="qrHint"></p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/file-types.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

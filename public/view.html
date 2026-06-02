@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Content</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <main class="view-page">
+    <article class="view-card" id="viewCard">
+      <div class="loading" id="loading">Loading…</div>
+      <div id="contentWrap" hidden>
+        <header>
+          <h1 id="viewTitle">Content</h1>
+        </header>
+        <div class="view-content" id="viewContent"></div>
+        <div class="view-actions" id="viewActions"></div>
+      </div>
+      <div class="error-state" id="errorWrap" hidden>
+        <h2>Not found</h2>
+        <p>This QR link is invalid or has expired.</p>
+        <a href="/">Create a new QR</a>
+      </div>
+    </article>
+  </main>
+  <script src="/js/file-types.js"></script>
+  <script src="/js/view.js"></script>
+</body>
+</html>
